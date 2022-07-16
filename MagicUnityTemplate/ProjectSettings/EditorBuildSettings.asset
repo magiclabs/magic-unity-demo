@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/NFTCreationSceneEditor.unity
+    guid: 251ddf868b5dd1f4ba2ae5f294835069
   m_configObjects: {}

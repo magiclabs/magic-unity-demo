@@ -26,7 +26,7 @@ namespace link.magic.unity.sdk.Provider
             _relayer.Load(url);
         }
 
-        public string _generateBoxUrl(UrlBuilder urlBuilder)
+        private string _generateBoxUrl(UrlBuilder urlBuilder)
         {
             // encode options params to base 64
             var optionsJsonString = JsonUtility.ToJson(urlBuilder);

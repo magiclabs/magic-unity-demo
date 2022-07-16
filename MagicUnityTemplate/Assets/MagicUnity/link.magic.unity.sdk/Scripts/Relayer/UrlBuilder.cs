@@ -19,18 +19,18 @@ namespace link.magic.unity.sdk.Relayer
             options.ETH_NETWORK = customNode;
             options.locale = locale;
             options.API_KEY = apikey;
-
+            options.bundleId = Application.identifier;
             var optionsJsonString = JsonUtility.ToJson(options);
             EncodedParams = MagicUtility.BtoA(optionsJsonString);
         }
 
-        internal UrlBuilder(string apikey, EthNetworkConfiguration ethNetwork, string locale)
+        internal UrlBuilder(string apikey, EthNetwork ethNetwork, string locale)
         {
             var options = new EthNetworkOptions();
-            options.ETH_NETWORK = ethNetwork;
+            options.ETH_NETWORK = ethNetwork.ToString().ToLower();
             options.locale = locale;
             options.API_KEY = apikey;
-
+            options.bundleId = Application.identifier;
             var optionsJsonString = JsonUtility.ToJson(options);
             EncodedParams = MagicUtility.BtoA(optionsJsonString);
         }
@@ -39,7 +39,7 @@ namespace link.magic.unity.sdk.Relayer
     [Serializable]
     internal class EthNetworkOptions : BaseOptions
     {
-        public EthNetworkConfiguration ETH_NETWORK;
+        public string ETH_NETWORK;
     }
 
     [Serializable]
@@ -60,18 +60,7 @@ namespace link.magic.unity.sdk.Relayer
             this.chainId = chainId;
         }
     }
-
-    [Serializable]
-    public class EthNetworkConfiguration
-    {
-        [SerializeField] internal string network;
-
-        public EthNetworkConfiguration(EthNetwork network)
-        {
-            this.network = nameof(network);
-        }
-    }
-
+    
     [Serializable]
     public class BaseOptions
     {
@@ -79,5 +68,7 @@ namespace link.magic.unity.sdk.Relayer
         public string sdk = "magic-sdk-unity";
         public string API_KEY;
         public string locale;
+        public string bundleId;
+        public string version = "8.1.1";
     }
 }
