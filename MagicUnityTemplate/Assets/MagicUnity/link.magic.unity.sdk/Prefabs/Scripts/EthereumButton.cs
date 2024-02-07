@@ -10,27 +10,14 @@ using Nethereum.RPC.Eth;
 using Nethereum.RPC.Eth.DTOs;
 using Nethereum.RPC.Eth.Transactions;
 using Nethereum.RPC.Personal;
-using Nethereum.Util;
-using Nethereum.Web3.Accounts;
-using Nethereum.Web3;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
-using Nethereum.Contracts;
-using Nethereum.ABI.FunctionEncoding.Attributes;
 
 public class EthereumButton : MonoBehaviour
 {
     private string _account;
     
-    public TMP_InputField result;
-    public TMP_InputField accountOutput;
-
-    public TMP_InputField accountInput;
-
-    public TMP_InputField fromAccount;
-    public TMP_InputField toAccount;
-    public TMP_InputField amount;
+    public Text result;
 
     // Start is called before the first frame update
     void Start()
@@ -51,7 +38,7 @@ public class EthereumButton : MonoBehaviour
         var accounts = await ethAccounts.SendRequestAsync();
         var transaction = new EthSendTransaction(Magic.Instance.Provider);
         var transactionInput = new TransactionInput
-            { To = toAccount.text, Value = new HexBigInteger(UnitConversion.Convert.ToWei(amount.text)), From = fromAccount.text};
+            { To = accounts[0], Value = new HexBigInteger(10), From = accounts[0]};
         var hash = await transaction.SendRequestAsync(transactionInput);
         Debug.Log(hash);
         result.text = hash;
@@ -65,7 +52,6 @@ public class EthereumButton : MonoBehaviour
         _account = accounts[0];
         Debug.Log(accounts[0]);
         result.text = accounts[0];
-        accountOutput.text = accounts[0];
     }
 
     public async void EthSign()
@@ -84,9 +70,7 @@ public class EthereumButton : MonoBehaviour
     {
         var ethApiService = new EthApiService(Magic.Instance.Provider);
         var accounts = await ethApiService.Accounts.SendRequestAsync();
-        var web3 = new Web3(Magic.Instance.Provider);
-        var balance = await web3.Eth.GetBalance.SendRequestAsync(accountInput.text);
-        //var balance = await ethApiService.GetBalance.SendRequestAsync(accountInput.text);
+        var balance = await ethApiService.GetBalance.SendRequestAsync(accounts[0]);
         result.text = balance.ToString();
     }
     

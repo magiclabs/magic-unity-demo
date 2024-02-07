@@ -1,4 +1,5 @@
 using System;
+using JetBrains.Annotations;
 using link.magic.unity.sdk.Utility;
 using UnityEngine;
 
@@ -51,10 +52,10 @@ namespace link.magic.unity.sdk.Relayer
     [Serializable]
     public class CustomNodeConfiguration
     {
-        [SerializeField] internal int chainId;
+        [SerializeField] [CanBeNull] internal int? chainId; 
         [SerializeField] internal string rpcUrl;
 
-        public CustomNodeConfiguration(string rpcUrl, int chainId)
+        public CustomNodeConfiguration(string rpcUrl, int? chainId)
         {
             this.rpcUrl = rpcUrl;
             this.chainId = chainId;
@@ -69,6 +70,5 @@ namespace link.magic.unity.sdk.Relayer
         public string API_KEY;
         public string locale;
         public string bundleId;
-        public string version = "8.1.1";
     }
 }
