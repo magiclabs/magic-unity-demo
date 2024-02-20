@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class MagicUnityButton : MonoBehaviour
 {
+    public GameObject windows_webVeiw;
     public Text result;
     // Start is called before the first frame update
     void Start()
@@ -21,10 +22,11 @@ public class MagicUnityButton : MonoBehaviour
 
     public async void Login()
     {
-        Debug.Log("logging in...");
-        Magic magic = new Magic("pk_live_A88D2338EEECE1C9");
-        Debug.Log(magic);
-        var token = await magic.Auth.LoginWithEmailOtp("jamesrp13@gmail.com");
+        // Debug.Log("logging in...");
+        Magic magic = new Magic("pk_live_2C8DAF27FCBA05C9");
+        var token = await magic.Auth.LoginWithEmailOtp("nicholasobri@gmail.com");
+        Debug.Log("Sending Token...");
+        // windows_webVeiw.GetComponent<Windows_Handler>().win_load_url("https://doubleunderscore.net");
         // result.text = $"token {token}";
         // Debug.Log("token: " + token);
     }
