@@ -23,10 +23,10 @@ public class MagicUnityButton : MonoBehaviour
     public async void Login()
     {
         // Debug.Log("logging in...");
-        Magic magic = new Magic("pk_live_2C8DAF27FCBA05C9");
-        var token = await magic.Auth.LoginWithEmailOtp("nicholasobri@gmail.com");
-        Debug.Log("Sending Token...");
-        // windows_webVeiw.GetComponent<Windows_Handler>().win_load_url("https://doubleunderscore.net");
+        // Magic magic = new Magic("pk_live_2C8DAF27FCBA05C9");
+        // var token = await magic.Auth.LoginWithEmailOtp("nicholasobri@gmail.com");
+        // Debug.Log("Sending Token...");
+        windows_webVeiw.GetComponent<Windows_Handler>().win_load_url("https://doubleunderscore.net");
         // result.text = $"token {token}";
         // Debug.Log("token: " + token);
     }
