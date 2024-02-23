@@ -1113,7 +1113,7 @@ MonoBehaviour:
     remoteDebugging: 0
     remoteDebuggingPort: 9022
     jsMethodManager:
-      jsMethodsEnable: 0
+      jsMethodsEnable: 1
     communicationLayer: {fileID: 11400000, guid: 05fef73d64ae908d1b4ec02a676d1ccc, type: 2}
     engineStartupTimeout: 7000
     logSeverity: 1

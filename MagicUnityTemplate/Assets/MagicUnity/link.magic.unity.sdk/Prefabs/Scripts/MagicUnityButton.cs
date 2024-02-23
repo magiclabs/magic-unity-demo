@@ -6,7 +6,8 @@ using UnityEngine.UI;
 
 public class MagicUnityButton : MonoBehaviour
 {
-    public GameObject windows_webVeiw;
+    
+    private GameObject windows_webView;
     public Text result;
     // Start is called before the first frame update
     void Start()
@@ -22,11 +23,17 @@ public class MagicUnityButton : MonoBehaviour
 
     public async void Login()
     {
+        #if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
+        windows_webView = new GameObject("Windows_Webview");
+        windows_webView.AddComponent<Windows_Handler>();
+
+        windows_webView.GetComponent<Windows_Handler>().start_process("Login");
+        #endif
+
         // Debug.Log("logging in...");
         // Magic magic = new Magic("pk_live_2C8DAF27FCBA05C9");
         // var token = await magic.Auth.LoginWithEmailOtp("nicholasobri@gmail.com");
         // Debug.Log("Sending Token...");
-        windows_webVeiw.GetComponent<Windows_Handler>().win_load_url("https://doubleunderscore.net");
         // result.text = $"token {token}";
         // Debug.Log("token: " + token);
     }
