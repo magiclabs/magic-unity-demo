@@ -16,25 +16,29 @@ public class Windows_Handler : MonoBehaviour
     {
         UWB_prefab = Instantiate(Resources.Load("UnityWebBrowser") as GameObject);
         clientmanager = GameObject.FindWithTag("Windows_Browser").GetComponent<BaseUwbClientManager>();
-        
+
         webClient = clientmanager.browserClient;
-        webClient.RegisterJsMethod("Test", _cb);
+        webClient.RegisterJsMethod("_cb", _cb);
         webClient.RegisterJsMethod("Login", _login);
     }
 
-    public void Update(){
+    public void Update()
+    {
     }
 
-    private bool can_start(){
+    private bool can_start()
+    {
         var start = webClient.ReadySignalReceived;
         return start;
     }
 
-    public void start_process(string function){
+    public void start_process(string function)
+    {
         StartCoroutine(launch(function));
     }
 
-    public IEnumerator launch(string function){
+    public IEnumerator launch(string function)
+    {
         //Latency issue here that needs testing
         //UWB will not launch/pass ExecuteJS until ReadySignalReceived is true
         //But still needs a hard-wired delay for UWB to be completely loaded
@@ -42,23 +46,24 @@ public class Windows_Handler : MonoBehaviour
         yield return new WaitUntil(can_start);
         yield return new WaitForSeconds(0.1f);
 
-        webClient.ExecuteJs(
-            "uwb.ExecuteJsMethod('"+ function + "')"  
-        ); 
+        webClient.ExecuteJs(function);
 
         var webObject = clientmanager.gameObject;
 
         // // webClient.LoadUrl(url);
-        
+
         webObject.GetComponent<RawImage>().enabled = true;
-     
+
     }
 
-    
-
-    public void _cb()
+    public void LoadUrl(string url)
     {
-        Debug.Log("Test");
+        webClient.LoadUrl(url);
+    }
+
+    public void _cb(string json)
+    {
+        Debug.Log(json);
     }
 
     public void _login()
