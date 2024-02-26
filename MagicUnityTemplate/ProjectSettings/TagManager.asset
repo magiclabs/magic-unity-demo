@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Browser
   - Windows_Browser
+  - win_web
   layers:
   - Default
   - TransparentFX

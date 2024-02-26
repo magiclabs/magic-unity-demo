@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using link.magic.unity.sdk;
 using UnityEngine;
 using UnityEngine.UI;
+using WindowsHandler;
 
 public class MagicUnityButton : MonoBehaviour
 {
     
-    private GameObject windows_webView;
+    public GameObject windows_webView;
     public Text result;
     // Start is called before the first frame update
     void Start()
@@ -24,10 +25,12 @@ public class MagicUnityButton : MonoBehaviour
     public async void Login()
     {
         #if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
-        windows_webView = new GameObject("Windows_Webview");
-        windows_webView.AddComponent<Windows_Handler>();
 
+        windows_webView = GameObject.FindWithTag("win_web");
         windows_webView.GetComponent<Windows_Handler>().start_process("Login");
+
+        Magic magic = new Magic("pk_live_2C8DAF27FCBA05C9");
+        var token = await magic.Auth.LoginWithEmailOtp("nicholasobri@gmail.com");
         #endif
 
         // Debug.Log("logging in...");

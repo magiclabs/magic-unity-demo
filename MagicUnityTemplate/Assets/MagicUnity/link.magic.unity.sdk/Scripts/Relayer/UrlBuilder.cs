@@ -9,7 +9,7 @@ namespace link.magic.unity.sdk.Relayer
     {
         internal static UrlBuilder Instance;
 
-        public static readonly string Host = "https://box.magic.link";
+        public static readonly string Host = "http://192.168.1.25:3016";
         
         internal readonly string EncodedParams;
         public string apikey;

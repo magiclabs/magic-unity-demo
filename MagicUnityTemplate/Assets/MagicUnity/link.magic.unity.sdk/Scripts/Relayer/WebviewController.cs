@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using link.magic.unity.sdk.Provider;
 using UnityEngine;
 using VoltstroStudios.UnityWebBrowser;
+using WindowsHandler;
+
 
 namespace link.magic.unity.sdk.Relayer
 {
@@ -11,15 +13,17 @@ namespace link.magic.unity.sdk.Relayer
         // Switch variable depending on OS
 #if !UNITY_EDITOR_WIN || !UNITY_STANDALONE_WIN
         private readonly WebViewObject _webViewObject;
-        private readonly Dictionary<int, Func<string, bool>> _messageHandlers = new();
+       
 #else
-        private GameObject windows_webView
+        private GameObject windows_webView;
 #endif
+         private readonly Dictionary<int, Func<string, bool>> _messageHandlers = new();
 
 
         private readonly Queue<string> _queue = new();
         private bool _relayerLoaded;
         private bool _relayerReady;
+
 
 #if !UNITY_EDITOR_WIN || !UNITY_STANDALONE_WIN
         public WebviewController()
@@ -47,19 +51,10 @@ namespace link.magic.unity.sdk.Relayer
         {
             windows_webView = new GameObject("Windows_Webview");
             windows_webView.AddComponent<Windows_Handler>();
+            windows_webView.tag = "win_web";
+            // Debug.Log("launching Webview");
         }
 #endif
-
-        // #if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
-        // public void Awake(){
-        //     webBrowser = GameObject.FindWithTag("Browser").GetComponentInChildren<WebBrowserUIBasic>();
-        // }
-
-        // public WebviewController(){
-        //     Debug.Log("Using Windows");
-        //     webBrowser.loadURL("https://doubleunderscore.net");
-        // }
-        // #endif
 
         internal void Load(string url)
         {
@@ -70,7 +65,7 @@ namespace link.magic.unity.sdk.Relayer
 #endif
         }
 
-
+#if !UNITY_EDITOR_WIN || !UNITY_STANDALONE_WIN
         // callback js hooks
         private void _cb(string msg)
         {
@@ -101,6 +96,7 @@ namespace link.magic.unity.sdk.Relayer
                     break;
             }
         }
+#endif
 
         /// <summary>
         ///     Queue
