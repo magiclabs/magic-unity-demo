@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using link.magic.unity.sdk.Provider;
 using UnityEngine;
 using VoltstroStudios.UnityWebBrowser;
+using VoltstroStudios.UnityWebBrowser.Core;
 using WindowsHandler;
 
 
@@ -16,6 +17,8 @@ namespace link.magic.unity.sdk.Relayer
        
 #else
         private GameObject windows_webView;
+        public BaseUwbClientManager clientmanager;
+        private WebBrowserClient webClient;
 #endif
          private readonly Dictionary<int, Func<string, bool>> _messageHandlers = new();
 
@@ -49,10 +52,15 @@ namespace link.magic.unity.sdk.Relayer
 #else
         public WebviewController()
         {
-            windows_webView = new GameObject("Windows_Webview");
-            windows_webView.AddComponent<Windows_Handler>();
-            windows_webView.tag = "win_web";
-            // Debug.Log("launching Webview");
+            clientmanager = GameObject.FindWithTag("Windows_Browser").GetComponent<BaseUwbClientManager>();
+            webClient = clientmanager.browserClient;
+            webClient.RegisterJsMethod<string>("_cb", _cb);
+            
+            // windows_webView = new GameObject("Windows_Webview");
+            // windows_webView.AddComponent<Windows_Handler>();
+            // windows_webView.tag = "win_web";
+
+            Debug.Log("launching Webview");
         }
 #endif
 
@@ -61,16 +69,18 @@ namespace link.magic.unity.sdk.Relayer
 #if !UNITY_EDITOR_WIN || !UNITY_STANDALONE_WIN
             _webViewObject.LoadURL(url);
 #else
-            windows_webView.GetComponent<Windows_Handler>().LoadUrl(url);
+            webClient.LoadUrl(url);
 #endif
         }
 
-#if !UNITY_EDITOR_WIN || !UNITY_STANDALONE_WIN
+
         // callback js hooks
         private void _cb(string msg)
         {
             // Debug.Log($"MagicUnity Received Message from Relayer: {msg}");
             // Do SimRle Relayer JSON Deserialization just to fetch ids for handlers
+
+            #if !UNITY_EDITOR_WIN || !UNITY_STANDALONE_WIN
             var res = JsonUtility.FromJson<RelayerResponse<object>>(msg);
             var msgType = res.msgType;
 
@@ -95,8 +105,11 @@ namespace link.magic.unity.sdk.Relayer
                     _handleResponse(msg, res);
                     break;
             }
+            #else
+            Debug.Log(msg);
+            #endif
         }
-#endif
+
 
         /// <summary>
         ///     Queue

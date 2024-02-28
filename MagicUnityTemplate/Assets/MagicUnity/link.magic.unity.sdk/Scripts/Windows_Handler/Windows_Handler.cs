@@ -46,7 +46,7 @@ namespace WindowsHandler{
 
             yield return new WaitUntil(can_start);
             yield return new WaitForSeconds(0.1f);
-
+            Debug.Log("Sending Function to Relayer");
             webClient.ExecuteJs(function);
 
             var webObject = clientmanager.gameObject;

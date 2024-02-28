@@ -17,11 +17,6 @@ namespace link.magic.unity.sdk.Provider
             DefaultJsonSerializerSettingsFactory.BuildDefaultJsonSerializerSettings();
 
         //Webviewer
-        //WINDOS OPTION HERE 
-        #if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
-        public GameObject windows_webview;
-        #endif
-
         private readonly WebviewController _relayer = new();
 
         protected internal RpcProvider(UrlBuilder urlBuilder)
@@ -29,7 +24,7 @@ namespace link.magic.unity.sdk.Provider
             var url = _generateBoxUrl(urlBuilder);
 
             // init relayer
-            _relayer.Load(url);
+            // _relayer.Load(url);
         }
 
         //WHERE THE JS GETS BUILT
