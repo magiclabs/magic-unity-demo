@@ -31,7 +31,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6559084728031744814}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -171,7 +170,6 @@ RectTransform:
   - {fileID: 1660439166795330327}
   - {fileID: 3311192223917426218}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -247,6 +245,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 6559084728031744814}
     m_Modifications:
     - target: {fileID: 4858241708811828610, guid: 3dc7ca30e6e7d284cb5984eba9f2ce5a, type: 3}
@@ -366,6 +365,12 @@ PrefabInstance:
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4858241708811828611, guid: 3dc7ca30e6e7d284cb5984eba9f2ce5a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3767128607568156660}
   m_SourcePrefab: {fileID: 100100000, guid: 3dc7ca30e6e7d284cb5984eba9f2ce5a, type: 3}
 --- !u!1 &6559084729764541490 stripped
 GameObject:
@@ -381,7 +386,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6559084729764541490}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb5be66b468fd4fafa9eceb8cb63ba20, type: 3}
+  m_Script: {fileID: 11500000, guid: 8054969e64c74800a92d6e969e69ead9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   result: {fileID: 0}
@@ -395,6 +400,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 6559084728031744814}
     m_Modifications:
     - target: {fileID: 4858241708811828610, guid: 3dc7ca30e6e7d284cb5984eba9f2ce5a, type: 3}
@@ -518,6 +524,12 @@ PrefabInstance:
       value: Get Metadata
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4858241708811828611, guid: 3dc7ca30e6e7d284cb5984eba9f2ce5a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3226686335908826964}
   m_SourcePrefab: {fileID: 100100000, guid: 3dc7ca30e6e7d284cb5984eba9f2ce5a, type: 3}
 --- !u!1 &1660439166795330326 stripped
 GameObject:
@@ -533,7 +545,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1660439166795330326}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb5be66b468fd4fafa9eceb8cb63ba20, type: 3}
+  m_Script: {fileID: 11500000, guid: 47bf3cdb11654a30aa43ff69875ec6a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   result: {fileID: 0}
@@ -547,6 +559,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 6559084728031744814}
     m_Modifications:
     - target: {fileID: 4858241708811828610, guid: 3dc7ca30e6e7d284cb5984eba9f2ce5a, type: 3}
@@ -670,6 +683,12 @@ PrefabInstance:
       value: Logout
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4858241708811828611, guid: 3dc7ca30e6e7d284cb5984eba9f2ce5a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2675760839547988845}
   m_SourcePrefab: {fileID: 100100000, guid: 3dc7ca30e6e7d284cb5984eba9f2ce5a, type: 3}
 --- !u!224 &3311192223917426218 stripped
 RectTransform:
@@ -690,7 +709,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3311192223917426219}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb5be66b468fd4fafa9eceb8cb63ba20, type: 3}
+  m_Script: {fileID: 11500000, guid: 47bf3cdb11654a30aa43ff69875ec6a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   result: {fileID: 0}

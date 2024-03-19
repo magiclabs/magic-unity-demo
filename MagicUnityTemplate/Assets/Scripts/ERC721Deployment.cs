@@ -1,26 +1,11 @@
 using Nethereum.ABI.FunctionEncoding.Attributes;
 using Nethereum.Contracts;
-using Nethereum.RPC.Eth;
 using System.Collections;
-using System.Collections.Generic;
 using Nethereum.Web3;
-using Nethereum.Contracts.CQS;
-using Nethereum.Util;
-using Nethereum.Web3.Accounts;
-using Nethereum.Hex.HexConvertors.Extensions;
-using Nethereum.Contracts.Extensions;
-using Nethereum.RPC;
-using Nethereum.RPC.Eth.DTOs;
-using Nethereum.RPC.Eth.Transactions;
-using Nethereum.RPC.Personal;
-using Nethereum.Contracts.ContractHandlers;
-using Nethereum.Contracts.DeploymentHandlers;
-using Nethereum.RPC.Web3;
 using System.Numerics;
 using UnityEngine;
-using link.magic.unity.sdk;
+using MagicSDK;
 using TMPro;
-using System.Diagnostics;
 using Sample.Ethereum.ERC721PresetMinterPauserAutoId.ContractDefinition;
 using Sample.Ethereum.ERC721PresetMinterPauserAutoId;
 
