@@ -15,7 +15,7 @@ public class MagicUnityButton : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       magic = new Magic("pk_live_2C8DAF27FCBA05C9");
+    //    magic = new Magic("pk_live_2C8DAF27FCBA05C9");
     }
 
     // Update is called once per frame
@@ -27,7 +27,10 @@ public class MagicUnityButton : MonoBehaviour
     public async void Login()
     {
         #if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
-        var token = await magic.Auth.LoginWithEmailOtp("nicholasobri@gmail.com");
+        magic = new Magic("pk_live_A88D2338EEECE1C9");
+        Debug.Log("Login");
+        var token = await magic.Auth.LoginWithEmailOtp("jacob.bullock@gmail.com");
+        
         // StartCoroutine("_login");
 
         // windows_webView = GameObject.FindWithTag("win_web");
