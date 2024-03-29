@@ -15,7 +15,7 @@ public class MagicUnityButton : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-    //    magic = new Magic("pk_live_2C8DAF27FCBA05C9");
+       //  magic = new Magic("pk_live_2C8DAF27FCBA05C9");
     }
 
     // Update is called once per frame
@@ -64,7 +64,8 @@ public class MagicUnityButton : MonoBehaviour
 
     public async void Logout()
     {
-        Magic magic = Magic.Instance;
+        // Magic magic = Magic.Instance;
+        magic = new Magic("pk_live_A88D2338EEECE1C9");
         var isLogout = await magic.User.Logout();
         result.text = $"Logout: {isLogout.ToString()}";
     }

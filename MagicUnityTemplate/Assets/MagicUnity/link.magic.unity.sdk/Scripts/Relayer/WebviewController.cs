@@ -27,9 +27,10 @@ namespace link.magic.unity.sdk.Relayer
 
 #else
         private GameObject windows_webView;
-        private GameObject windows_webView_container;
+        private GameObject webviewContainer;
         public BaseUwbClientManager clientmanager;
         private WebBrowserClient webClient;
+        RectTransform uwbRectTransform;
 #endif
         private readonly Dictionary<int, Func<string, bool>> _messageHandlers = new();
 
@@ -63,27 +64,28 @@ namespace link.magic.unity.sdk.Relayer
 #else
         public WebviewController()
         {
-            GameObject container = new GameObject("WebViewObjectContainer");
+            webviewContainer = new GameObject("WebViewObjectContainer");
 
             //Create canvas
-            Canvas canvas = container.AddComponent<Canvas>();
+            Canvas canvas = webviewContainer.AddComponent<Canvas>();
+            canvas.sortingOrder = 10;
             canvas.renderMode = RenderMode.ScreenSpaceCamera;
             // canvas.worldCamera = Camera.main;
 
-            CanvasScaler canvasScaler = container.AddComponent<CanvasScaler>();
+            CanvasScaler canvasScaler = webviewContainer.AddComponent<CanvasScaler>();
             canvasScaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
             canvasScaler.referenceResolution = new Vector2(1920, 1080);
             canvasScaler.screenMatchMode = CanvasScaler.ScreenMatchMode.MatchWidthOrHeight;
             canvasScaler.matchWidthOrHeight = 0;
 
-            container.AddComponent<GraphicRaycaster>();
+            webviewContainer.AddComponent<GraphicRaycaster>();
             
             //Child object, where raw image and UWB itself will live
             GameObject uwbGameObject = new("UWBContainer");
-            uwbGameObject.transform.SetParent(container.transform);
+            uwbGameObject.transform.SetParent(webviewContainer.transform);
             
             //Configure rect transform
-            RectTransform uwbRectTransform = uwbGameObject.AddComponent<RectTransform>();
+            uwbRectTransform = uwbGameObject.AddComponent<RectTransform>();
             uwbRectTransform.anchorMin = Vector2.zero;
             uwbRectTransform.anchorMax = Vector2.one;
             uwbRectTransform.pivot = new Vector2(0.5f, 0.5f);
@@ -130,7 +132,10 @@ namespace link.magic.unity.sdk.Relayer
             clientmanager = uwbGameObject.GetComponent<BaseUwbClientManager>();
             webClient = clientmanager.browserClient;
             webClient.jsMethodManager.jsMethodsEnable = true;
+            webClient.initialUrl = "https://box.magic.link";
             webClient.RegisterJsMethod<string>("_cb", _cb);
+
+            uwbRectTransform.localScale = Vector3.zero;
         }
 
 
@@ -186,23 +191,6 @@ namespace link.magic.unity.sdk.Relayer
         }
 #endif
 
-        void Start() {
-            Debug.Log("Start ----------- ");
-           
-        }
-        IEnumerator DelayAction() {
-             Debug.Log("DelayAction.yield");
-            yield return new WaitForSeconds(5);
-            Debug.Log("DelayAction");
-            Test();
-        }
-
-        void Test() {
-            Debug.Log("Test");
-            _relayerLoaded = true;
-            _relayerReady = true;
-            _dequeue();
-        }
         internal void Load(string url)
         {
             Debug.Log("Load.url: " + url);
@@ -210,17 +198,25 @@ namespace link.magic.unity.sdk.Relayer
             _webViewObject.LoadURL(url);
 #else
             Debug.Log("browser.Load()" + url);
-            
-            TestAsync(url); // url "http://google.com"
+            DelayLoadUrl(url);
+           // TestAsync(url); // url "http://google.com"
              //Invoke("Test", 5.0f);
 #endif
         }
 
-        async void TestAsync(string url) {
-            await Task.Delay(2000);
+        // void Test() {
+        //     Debug.Log("Test");
+        //     // _relayerLoaded = true;
+        //     _relayerReady = true;
+        //     _dequeue();
+        // }
+
+        async void DelayLoadUrl(string url) {
+            await Task.Delay(1500);
+            _relayerLoaded = true;
             webClient.LoadUrl(url);
-            await Task.Delay(2000);
-            Test();
+            // await Task.Delay(2000);
+            // Test();
         }
 
 
@@ -258,7 +254,36 @@ namespace link.magic.unity.sdk.Relayer
 #else
             Debug.Log("CALLBACK");
             Debug.Log(msg);
-            // Debug.Log(method);
+
+            var res = JsonUtility.FromJson<RelayerResponse<object>>(msg);
+            var msgType = res.msgType;
+
+            var method = msgType.Split("-")[0];
+
+            Debug.Log("method: " + method);
+            switch (method)
+            {
+                case nameof(InboundMessageType.MAGIC_OVERLAY_READY):
+                    _relayerReady = true;
+                    _dequeue();
+                    break;
+                case nameof(InboundMessageType.MAGIC_SHOW_OVERLAY):
+                    //_webViewObject.SetVisibility(true);
+                    Debug.Log("SHOW BROWSER");
+                    uwbRectTransform.localScale = Vector3.one;
+                    break;
+                case nameof(InboundMessageType.MAGIC_HIDE_OVERLAY):
+                    //_webViewObject.SetVisibility(false);
+                    uwbRectTransform.localScale = Vector3.zero;
+                    Debug.Log("HIDE BROWSER");
+                    break;
+                case nameof(InboundMessageType.MAGIC_HANDLE_EVENT):
+                    //Todo Unsupported for now
+                    break;
+                case nameof(InboundMessageType.MAGIC_HANDLE_RESPONSE):
+                    _handleResponse(msg, res);
+                    break;
+            }
 #endif
         }
 
