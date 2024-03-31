@@ -12,7 +12,6 @@ using VoltstroStudios.UnityWebBrowser.Shared.Core;
 using VoltstroStudios.UnityWebBrowser.Core.Engines;
 using VoltstroStudios.UnityWebBrowser.Communication;
 using VoltstroStudios.UnityWebBrowser.Input;
-using WindowsHandler;
 using static VoltstroStudios.UnityWebBrowser.Core.Engines.Engine;
 
 
@@ -30,7 +29,7 @@ namespace link.magic.unity.sdk.Relayer
         private bool _relayerReady;
 
 
-// Windows and Non-Windows have different Browser implementations
+        // Windows and Non-Windows have different Browser implementations
 #if !UNITY_EDITOR_WIN || !UNITY_STANDALONE_WIN
         // NON-WINDOWS
 
@@ -57,20 +56,24 @@ namespace link.magic.unity.sdk.Relayer
             );
         }
 
-        private void ShowBrowser() {
+        private void ShowBrowser()
+        {
             _webViewObject.SetVisibility(true);
         }
 
-        private void HideBrowser() {
+        private void HideBrowser()
+        {
             _webViewObject.SetVisibility(false);
         }
 
-        internal void Load(string url) {
-             _webViewObject.LoadURL(url);
+        internal void Load(string url)
+        {
+            _webViewObject.LoadURL(url);
         }
 
-        private void ExecuteJavaScript(string js) {
-             _webViewObject.EvaluateJS(js);
+        private void ExecuteJavaScript(string js)
+        {
+            _webViewObject.EvaluateJS(js);
         }
 #else
         // WINDOWS
