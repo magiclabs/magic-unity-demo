@@ -22,8 +22,10 @@ public class MagicUnityButton : MonoBehaviour
     public async void Login()
     {
         Magic magic = Magic.Instance;
-        Debug.Log("Login");
-        var token = await magic.Auth.LoginWithEmailOtp("jacob.bullock@gmail.com");
+        Debug.Log(magic);
+        var token = await magic.Auth.LoginWithEmailOtp("jamesrp13@gmail.com");
+        Debug.Log("token: " + token);
+        // result.text = $"token {token}";
     }
 
     public async void GetMetadata()

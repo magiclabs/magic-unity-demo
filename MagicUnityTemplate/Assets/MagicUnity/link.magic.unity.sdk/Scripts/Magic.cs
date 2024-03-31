@@ -2,6 +2,7 @@ using link.magic.unity.sdk.Modules.Auth;
 using link.magic.unity.sdk.Modules.User;
 using link.magic.unity.sdk.Provider;
 using link.magic.unity.sdk.Relayer;
+using UnityEngine;
 
 namespace link.magic.unity.sdk
 {
@@ -15,22 +16,22 @@ namespace link.magic.unity.sdk
         public readonly UserModule User;
 
         //Constructor
-        public Magic(string apikey, EthNetwork network = EthNetwork.Mainnet, string locale = "en-US")
+        public Magic(string apikey, EthNetwork network = EthNetwork.Mainnet, string locale = "en-US", GameObject canvas = null)
         {
             var urlBuilder = new UrlBuilder(apikey, network, locale);
             UrlBuilder.Instance = urlBuilder;
-            
-            Provider = new RpcProvider(urlBuilder);
+
+            Provider = new RpcProvider(urlBuilder, canvas);
             User = new UserModule(Provider);
             Auth = new AuthModule(Provider);
         }
 
-        public Magic(string apikey, CustomNodeConfiguration config, string locale = "en-US")
+        public Magic(string apikey, CustomNodeConfiguration config, string locale = "en-US", GameObject canvas = null)
         {
             var urlBuilder = new UrlBuilder(apikey, config, locale);
             UrlBuilder.Instance = urlBuilder;
 
-            Provider = new RpcProvider(urlBuilder);
+            Provider = new RpcProvider(urlBuilder, canvas);
             User = new UserModule(Provider);
             Auth = new AuthModule(Provider);
         }

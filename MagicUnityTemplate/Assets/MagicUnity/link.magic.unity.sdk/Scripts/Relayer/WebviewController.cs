@@ -35,10 +35,17 @@ namespace link.magic.unity.sdk.Relayer
 
         private readonly WebViewObject _webViewObject;
 
-        public WebviewController()
+        public WebviewController(GameObject canvas)
         {
             // instantiate webview 
             _webViewObject = new GameObject("WebViewObject").AddComponent<WebViewObject>();
+#if UNITY_EDITOR_OSX || UNITY_STANDALONE_OSX
+            _webViewObject.canvas = canvas;
+            if (!canvas)
+            {
+                Debug.LogWarning("Magic Canvas is required for OSX and Editor support");
+            }
+#endif
             _webViewObject.Init(
                 cb: _cb,
                 ld: (msg) =>
