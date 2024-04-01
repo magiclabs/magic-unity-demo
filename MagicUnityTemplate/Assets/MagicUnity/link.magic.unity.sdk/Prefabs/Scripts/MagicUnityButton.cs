@@ -8,6 +8,9 @@ public class MagicUnityButton : MonoBehaviour
 {
     public Magic magic;
     public Text result;
+
+    [SerializeField] internal string OTPEmail;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +26,7 @@ public class MagicUnityButton : MonoBehaviour
     {
         Magic magic = Magic.Instance;
         Debug.Log(magic);
-        var token = await magic.Auth.LoginWithEmailOtp("jamesrp13@gmail.com");
+        var token = await magic.Auth.LoginWithEmailOtp(OTPEmail);
         Debug.Log("token: " + token);
         // result.text = $"token {token}";
     }

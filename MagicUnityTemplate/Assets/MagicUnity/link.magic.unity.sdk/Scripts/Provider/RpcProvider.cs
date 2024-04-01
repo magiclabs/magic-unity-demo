@@ -22,8 +22,11 @@ namespace link.magic.unity.sdk.Provider
         {
             var url = _generateBoxUrl(urlBuilder);
 
+#if UNITY_EDITOR_OSX || UNITY_STANDALONE_OSX
             _relayer = new(canvas);
-
+#else
+            _relayer = new();
+#endif 
             // init relayer
             Debug.Log("RpcProvider.init");
             Debug.Log("_relayer.Load(" + url + ")");
