@@ -28,8 +28,6 @@ namespace link.magic.unity.sdk.Provider
             _relayer = new();
 #endif 
             // init relayer
-            Debug.Log("RpcProvider.init");
-            Debug.Log("_relayer.Load(" + url + ")");
             _relayer.Load(url);
         }
 
@@ -41,7 +39,6 @@ namespace link.magic.unity.sdk.Provider
             Debug.Log(optionsJsonString);
 
             var url = $"{UrlBuilder.Host}/send/?params={urlBuilder.EncodedParams}";
-            Debug.Log(url);
 
             return url;
         }
@@ -49,7 +46,6 @@ namespace link.magic.unity.sdk.Provider
         // 
         protected override async Task<RpcResponseMessage> SendAsync(RpcRequestMessage request, string route = null)
         {
-            Debug.Log("SendAsync");
             var msgType = $"{nameof(OutboundMessageType.MAGIC_HANDLE_REQUEST)}-{UrlBuilder.Instance.EncodedParams}";
             var relayerRequest = new RelayerRequestNethereum(msgType, request);
             var requestMsg = JsonConvert.SerializeObject(relayerRequest, _jsonSerializerSettings);
@@ -73,7 +69,6 @@ namespace link.magic.unity.sdk.Provider
 
         protected internal async Task<TResult> MagicSendAsync<TParams, TResult>(MagicRpcRequest<TParams> magicRequest)
         {
-            Debug.Log("MagicSendAsync");
             // Wrap with Relayer params and send to relayer
             var msgType = $"{nameof(OutboundMessageType.MAGIC_HANDLE_REQUEST)}-{UrlBuilder.Instance.EncodedParams}";
             var relayerRequest = new RelayerRequest<TParams>(msgType, magicRequest);

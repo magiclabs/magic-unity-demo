@@ -7,7 +7,6 @@ using UnityEngine;
 
 public class MagicUnity : MonoBehaviour
 {
-    public Magic magic;
     // Start is called before the first frame update
     void Start()
     {

@@ -9,8 +9,8 @@ namespace link.magic.unity.sdk.Relayer
     {
         internal static UrlBuilder Instance;
 
-        public static readonly string Host = "https://box.magic.link"; //"http://localhost:3016";
-        
+        public static readonly string Host = "https://box.magic.link";
+
         internal readonly string EncodedParams;
         public string apikey;
 
@@ -52,7 +52,7 @@ namespace link.magic.unity.sdk.Relayer
     [Serializable]
     public class CustomNodeConfiguration
     {
-        [SerializeField] [CanBeNull] internal int? chainId; 
+        [SerializeField][CanBeNull] internal int? chainId;
         [SerializeField] internal string rpcUrl;
 
         public CustomNodeConfiguration(string rpcUrl, int? chainId)
@@ -61,7 +61,7 @@ namespace link.magic.unity.sdk.Relayer
             this.chainId = chainId;
         }
     }
-    
+
     [Serializable]
     public class BaseOptions
     {

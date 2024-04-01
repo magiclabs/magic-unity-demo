@@ -196,7 +196,7 @@ namespace link.magic.unity.sdk.Relayer
         // callback js hooks
         private void _cb(string msg)
         {
-            Debug.Log($"MagicUnity Received Message from Relayer: {msg}");
+            // Debug.Log($"MagicUnity Received Message from Relayer: {msg}");
             // Do SimRle Relayer JSON Deserialization just to fetch ids for handlers
 
             var res = JsonUtility.FromJson<RelayerResponse<object>>(msg);
@@ -237,7 +237,6 @@ namespace link.magic.unity.sdk.Relayer
 
         private void _dequeue()
         {
-            Debug.Log("_dequeue _relayerLoadedL" + (_relayerLoaded ? "true" : "false") + ", _relayerReady:" + (_relayerReady ? "true" : "false") + ", count:" + _queue.Count.ToString());
             if (_queue.Count != 0 && _relayerReady && _relayerLoaded)
             {
                 var message = _queue.Dequeue();
@@ -250,7 +249,6 @@ namespace link.magic.unity.sdk.Relayer
 
         private void _handleResponse(string originalMsg, RelayerResponse<object> relayerResponse)
         {
-            Debug.Log("_handleResponse: " + originalMsg);
             var payloadId = relayerResponse.response.id;
             var handler = _messageHandlers[payloadId];
             handler(originalMsg);
