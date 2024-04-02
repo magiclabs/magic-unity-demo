@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using link.magic.unity.sdk;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class MagicUnityButton : MonoBehaviour
 {
-    public Text result;
+    public Magic magic;
+    [SerializeField] public TextMeshProUGUI result;
 
     [SerializeField] internal string OTPEmail;
 
