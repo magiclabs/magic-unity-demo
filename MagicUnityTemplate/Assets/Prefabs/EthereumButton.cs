@@ -2,8 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
-using link.magic.unity.sdk;
-using link.magic.unity.sdk.Provider;
+using MagicSDK;
+using MagicSDK.Provider;
 using Nethereum.Hex.HexTypes;
 using Nethereum.RPC;
 using Nethereum.RPC.Eth;
@@ -16,7 +16,7 @@ using UnityEngine.UI;
 public class EthereumButton : MonoBehaviour
 {
     private string _account;
-    
+
     public Text result;
 
     // Start is called before the first frame update
@@ -27,9 +27,9 @@ public class EthereumButton : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
-    
+
     // Update is called once per frame
     public async void SendTransaction()
     {
@@ -38,12 +38,12 @@ public class EthereumButton : MonoBehaviour
         var accounts = await ethAccounts.SendRequestAsync();
         var transaction = new EthSendTransaction(Magic.Instance.Provider);
         var transactionInput = new TransactionInput
-            { To = accounts[0], Value = new HexBigInteger(10), From = accounts[0]};
+        { To = accounts[0], Value = new HexBigInteger(10), From = accounts[0] };
         var hash = await transaction.SendRequestAsync(transactionInput);
         Debug.Log(hash);
         result.text = hash;
     }
-    
+
     public async void GetAccount()
     {
         result.text = "";
@@ -57,11 +57,11 @@ public class EthereumButton : MonoBehaviour
     public async void EthSign()
     {
         result.text = "";
-        
+
         var ethAccounts = new EthAccounts(Magic.Instance.Provider);
         var accounts = await ethAccounts.SendRequestAsync();
         var personalSign = new EthSign(Magic.Instance.Provider);
-        var transactionInput = new TransactionInput{Data = "Hello world"};
+        var transactionInput = new TransactionInput { Data = "Hello world" };
         var res = await personalSign.SendRequestAsync(accounts[0], "hello world");
         result.text = res;
     }
@@ -73,7 +73,7 @@ public class EthereumButton : MonoBehaviour
         var balance = await ethApiService.GetBalance.SendRequestAsync(accounts[0]);
         result.text = balance.ToString();
     }
-    
+
     public async void GetChainId()
     {
         var ethApiService = new EthApiService(Magic.Instance.Provider);

@@ -20,6 +20,13 @@
       "dependencies": {},
       "url": "https://upm-pkgs.voltstro.dev"
     },
+    "com.nethereum.unity": {
+      "version": "4.19.2",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://package.openupm.com"
+    },
     "com.unity.ai.navigation": {
       "version": "1.1.5",
       "depth": 0,
@@ -275,6 +282,25 @@
         "dev.voltstro.nuget.mono.unix": "1.0.0"
       },
       "url": "https://upm-pkgs.voltstro.dev"
+    },
+    "link.magic.unity.sdk": {
+      "version": "3.1.1",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.nuget.newtonsoft-json": "3.2.1",
+        "com.nethereum.unity": "4.19.2",
+        "net.gree.unity-webview": "1.0.0",
+        "dev.voltstro.unitywebbrowser": "2.1.1"
+      },
+      "url": "https://package.openupm.com"
+    },
+    "net.gree.unity-webview": {
+      "version": "https://github.com/gree/unity-webview.git?path=/dist/package",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "bc6b71a059efb4d23a07f8cdea4deb158ba1ec14"
     },
     "org.nuget.voltrpc": {
       "version": "3.2.0",

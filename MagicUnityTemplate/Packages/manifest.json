@@ -49,24 +49,21 @@
     "com.unity.modules.video": "1.0.0",
     "com.unity.modules.vr": "1.0.0",
     "com.unity.modules.wind": "1.0.0",
-    "com.unity.modules.xr": "1.0.0"
+    "com.unity.modules.xr": "1.0.0",
+    "com.nethereum.unity": "4.19.2",
+    "net.gree.unity-webview": "https://github.com/gree/unity-webview.git?path=/dist/package",
+    "link.magic.unity.sdk": "3.1.1"
   },
   "scopedRegistries": [
     {
-      "name": "OpenUPM",
-      "url": "https://package.openupm.com",
-      "scopes": [
-        "com.atteneder"
-      ]
-    },
-    {
       "name": "Voltstro UPM",
       "url": "https://upm-pkgs.voltstro.dev",
-      "scopes": [
-        "dev.voltstro",
-        "org.nuget",
-        "com.cysharp.unitask"
-      ]
+      "scopes": ["dev.voltstro", "org.nuget", "com.cysharp.unitask"]
+    },
+    {
+      "name": "OpenUPM",
+      "url": "https://package.openupm.com",
+      "scopes": ["com.atteneder", "com.nethereum.unity", "link.magic.unity.sdk"]
     }
   ]
 }

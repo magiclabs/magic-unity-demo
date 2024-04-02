@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using link.magic.unity.sdk;
+using MagicSDK;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
