@@ -18,7 +18,7 @@ using Nethereum.Contracts.DeploymentHandlers;
 using Nethereum.RPC.Web3;
 using System.Numerics;
 using UnityEngine;
-using link.magic.unity.sdk;
+using MagicSDK;
 using TMPro;
 using System.Diagnostics;
 using Sample.Ethereum.ERC721PresetMinterPauserAutoId.ContractDefinition;
